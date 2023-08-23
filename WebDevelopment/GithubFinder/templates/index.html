@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Github Finder</title>
+    <link rel="stylesheet" href="static/style.css" />
   </head>
   <body>
     <nav class="bg-black">
@@ -13,21 +14,49 @@
     </nav>
     <div>
       <div class="border bg-grey m-2 p-2">
-        <h1 class="text-center text-3xl">Search Github Users</h1>
-        <p>Please enter user a name</p>
         <form action="/" method="post">
-          <input
-            type="text"
-            name="githubName"
-            class="p-2 mt-2 border"
-            placeholder="User Name"
-          />
+          <h1 class="text-center text-3xl">Search Github Users</h1>
+          <label for="githubName" style="display: block">Please enter username</label>
+          <input type="text" id="githubName" name="githubName" class="p-2 mt-2 border" placeholder="User Name" />
           <br />
-          <button type="submit" class="bg-lime-900 text-white p-2 mt-2">
-            Search
-          </button>
+          <button type="submit" class="bg-lime-900 text-white p-2 mt-2">Search</button>
         </form>
       </div>
+      {% if userProfile %}
+        <div>
+          <div class="profile flex flex-row">
+            <div>
+              <img class="w-6/12 h-6/12 rounded-full m-3" src="{{ userProfile.avatar_url }}" alt="Profile Image" />
+            </div>
+            <div class="profileDetails flex space-x-4 text-center">
+              <div class="flex flex-col">
+                <span>Repo Count</span>
+                <span>{{ userProfile.public_repos }}</span>
+              </div>
+              <div class="flex flex-col">
+                <span>Gist Count</span>
+                <span>{{ userProfile.public_gists }}</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span>Followers</span>
+                <span>{{ userProfile.followers }}</span>
+              </div>
+              <div class="flex flex-col">
+                <span>Following</span>
+                <span>{{ userProfile.following }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col m-5">
+            <span>Company: {{ userProfile.company }}</span>
+            <span>Website: {{ userProfile.website }}</span>
+            <span>Location: {{ userProfile.location }}</span>
+            <span>Bio: {{ userProfile.bio }}</span>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </body>
 </html>
